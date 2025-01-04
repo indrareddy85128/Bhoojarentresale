@@ -63,7 +63,7 @@ class FaqPolicy
      */
     public function forceDelete(User $user, Faq $faq): bool
     {
-        return $user->can('force_delete_faq');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -71,7 +71,7 @@ class FaqPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_faq');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -79,7 +79,7 @@ class FaqPolicy
      */
     public function restore(User $user, Faq $faq): bool
     {
-        return $user->can('restore_faq');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class FaqPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_faq');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class FaqPolicy
      */
     public function replicate(User $user, Faq $faq): bool
     {
-        return $user->can('replicate_faq');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class FaqPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_faq');
+        return $user->can('{{ Reorder }}');
     }
 }

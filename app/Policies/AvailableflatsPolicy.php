@@ -63,7 +63,7 @@ class AvailableflatsPolicy
      */
     public function forceDelete(User $user, Availableflats $availableflats): bool
     {
-        return $user->can('force_delete_availableflats');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -71,7 +71,7 @@ class AvailableflatsPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_availableflats');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -79,7 +79,7 @@ class AvailableflatsPolicy
      */
     public function restore(User $user, Availableflats $availableflats): bool
     {
-        return $user->can('restore_availableflats');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class AvailableflatsPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_availableflats');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class AvailableflatsPolicy
      */
     public function replicate(User $user, Availableflats $availableflats): bool
     {
-        return $user->can('replicate_availableflats');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class AvailableflatsPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_availableflats');
+        return $user->can('{{ Reorder }}');
     }
 }

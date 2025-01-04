@@ -58,12 +58,17 @@ class LeadPolicy
         return $user->can('delete_any_lead');
     }
 
+    public function assign(User $user): bool
+    {
+        return $user->can('assign_lead');
+    }
+
     /**
      * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Lead $lead): bool
     {
-        return $user->can('force_delete_lead');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -71,7 +76,7 @@ class LeadPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_lead');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -79,7 +84,7 @@ class LeadPolicy
      */
     public function restore(User $user, Lead $lead): bool
     {
-        return $user->can('restore_lead');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +92,7 @@ class LeadPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_lead');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +100,7 @@ class LeadPolicy
      */
     public function replicate(User $user, Lead $lead): bool
     {
-        return $user->can('replicate_lead');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +108,6 @@ class LeadPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_lead');
+        return $user->can('{{ Reorder }}');
     }
 }

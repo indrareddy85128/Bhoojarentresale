@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Lead extends Model
 {
     protected $fillable = [
+        'user_id',
         'name',
         'email',
         'phone',
@@ -19,4 +20,9 @@ class Lead extends Model
     protected $casts = [
         'form_data' => 'json',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

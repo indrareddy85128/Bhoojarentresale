@@ -63,7 +63,7 @@ class ReviewPolicy
      */
     public function forceDelete(User $user, Review $review): bool
     {
-        return $user->can('force_delete_review');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -71,7 +71,7 @@ class ReviewPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_review');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -79,7 +79,7 @@ class ReviewPolicy
      */
     public function restore(User $user, Review $review): bool
     {
-        return $user->can('restore_review');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class ReviewPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_review');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class ReviewPolicy
      */
     public function replicate(User $user, Review $review): bool
     {
-        return $user->can('replicate_review');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class ReviewPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_review');
+        return $user->can('{{ Reorder }}');
     }
 }

@@ -4,24 +4,33 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LeadResource\Pages;
 use App\Models\Lead;
+use App\Models\User;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
-class LeadResource extends Resource
+class LeadResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = Lead::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-bookmark-square';
+
     public static function canCreate(): bool
     {
         return false;
@@ -145,6 +154,7 @@ class LeadResource extends Resource
                 TextColumn::make('phone')->searchable(),
                 TextColumn::make('lead_source'),
                 TextColumn::make('lead_status')->label('Status'),
+                TextColumn::make('user.name')->label('Assigned To'),
             ])
             ->filters([
                 //
@@ -153,6 +163,30 @@ class LeadResource extends Resource
                 ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
+                Action::make('assign')
+                    ->form([
+                        Select::make('user_id')
+                            ->label('Assign To')
+                            ->options(User::pluck('name', 'id')->toArray())
+                            ->required(),
+                    ])
+                    ->visible(fn() => Auth::user()->can('assign')) // Check if the user has the 'assign' permission
+                    ->label('Assign Task')
+                    ->icon('heroicon-o-user-add')
+                    ->action(function (array $data, Lead $record) {
+                        $user = User::find($data['user_id']);
+
+                        $record->update([
+                            'user_id' => $user->id,
+                        ]);
+
+                        Notification::make()
+                            ->success()
+                            ->title('Lead Assigned')
+                            ->body('Lead has been successfully assigned.')
+                            ->send();
+                    })
+                    ->requiresConfirmation()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -174,6 +208,19 @@ class LeadResource extends Resource
             'index' => Pages\ListLeads::route('/'),
             'create' => Pages\CreateLead::route('/create'),
             'edit' => Pages\EditLead::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+            'assign'
         ];
     }
 }

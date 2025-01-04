@@ -63,7 +63,7 @@ class GalleryPolicy
      */
     public function forceDelete(User $user, Gallery $gallery): bool
     {
-        return $user->can('force_delete_gallery');
+        return $user->can('{{ ForceDelete }}');
     }
 
     /**
@@ -71,7 +71,7 @@ class GalleryPolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_gallery');
+        return $user->can('{{ ForceDeleteAny }}');
     }
 
     /**
@@ -79,7 +79,7 @@ class GalleryPolicy
      */
     public function restore(User $user, Gallery $gallery): bool
     {
-        return $user->can('restore_gallery');
+        return $user->can('{{ Restore }}');
     }
 
     /**
@@ -87,7 +87,7 @@ class GalleryPolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_gallery');
+        return $user->can('{{ RestoreAny }}');
     }
 
     /**
@@ -95,7 +95,7 @@ class GalleryPolicy
      */
     public function replicate(User $user, Gallery $gallery): bool
     {
-        return $user->can('replicate_gallery');
+        return $user->can('{{ Replicate }}');
     }
 
     /**
@@ -103,6 +103,6 @@ class GalleryPolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_gallery');
+        return $user->can('{{ Reorder }}');
     }
 }

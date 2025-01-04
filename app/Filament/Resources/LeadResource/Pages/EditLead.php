@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\ResaleResource\Pages;
+namespace App\Filament\Resources\LeadResource\Pages;
 
-use App\Filament\Resources\ResaleResource;
+use App\Filament\Resources\LeadResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditResale extends EditRecord
+class EditLead extends EditRecord
 {
-    protected static string $resource = ResaleResource::class;
+    protected static string $resource = LeadResource::class;
 
     protected function getHeaderActions(): array
     {

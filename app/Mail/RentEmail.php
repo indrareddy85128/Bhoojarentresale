@@ -3,18 +3,20 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Attachment;
 
 class RentEmail extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $subject;
+
     public $rent;
+
     /**
      * Create a new message instance.
      */
@@ -53,7 +55,7 @@ class RentEmail extends Mailable
     {
         if ($this->rent->resume) {
             return [
-                Attachment::fromPath(storage_path('app/public/' . $this->rent->resume)),
+                Attachment::fromPath(storage_path('app/public/'.$this->rent->resume)),
             ];
         } else {
             return [];

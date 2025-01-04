@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AvailableflatsResource\Pages;
-use App\Filament\Resources\AvailableflatsResource\RelationManagers;
 use App\Models\Availableflats;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -16,14 +14,12 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Set;
-use Illuminate\Support\Str;
 
 class AvailableflatsResource extends Resource
 {
     protected static ?string $model = Availableflats::class;
+
+    protected static ?string $navigationGroup = 'Pages';
 
     protected static ?string $navigationIcon = 'heroicon-o-building-office-2';
 

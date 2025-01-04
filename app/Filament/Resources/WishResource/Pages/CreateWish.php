@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\WishResource\Pages;
 
 use App\Filament\Resources\WishResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateWish extends CreateRecord

@@ -3,21 +3,19 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
 class LoanEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $subject;
-    public $loan;
 
+    public $loan;
 
     public function __construct($subject, $loan)
     {
@@ -54,7 +52,7 @@ class LoanEmail extends Mailable
     {
         if ($this->loan->rc_copy) {
             return [
-                Attachment::fromPath(storage_path('app/public/' . $this->loan->rc_copy)),
+                Attachment::fromPath(storage_path('app/public/'.$this->loan->rc_copy)),
             ];
         } else {
             return [];

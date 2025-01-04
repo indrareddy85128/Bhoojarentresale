@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -12,12 +11,15 @@ use Illuminate\Queue\SerializesModels;
 class AvailableflatsEmail extends Mailable
 {
     use Queueable, SerializesModels;
+
     public $subject;
+
     public $Availableflatfrom;
+
     /**
      * Create a new message instance.
      */
-    public function __construct($subject,$Availableflatfrom)
+    public function __construct($subject, $Availableflatfrom)
     {
         $this->subject = $subject;
         $this->Availableflatfrom = $Availableflatfrom;
@@ -29,7 +31,7 @@ class AvailableflatsEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->subject ,
+            subject: $this->subject,
         );
     }
 

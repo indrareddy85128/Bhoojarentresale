@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ReviewResource\Pages;
-use App\Filament\Resources\ReviewResource\RelationManagers;
 use App\Models\Review;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -15,12 +13,12 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ReviewResource extends Resource
 {
     protected static ?string $model = Review::class;
+
+    protected static ?string $navigationGroup = 'Pages';
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
 

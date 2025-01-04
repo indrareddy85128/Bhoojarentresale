@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\RentResource\Pages;
+namespace App\Filament\Resources\LeadResource\Pages;
 
-use App\Filament\Resources\RentResource;
+use App\Filament\Resources\LeadResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListRents extends ListRecords
+class ListLeads extends ListRecords
 {
-    protected static string $resource = RentResource::class;
+    protected static string $resource = LeadResource::class;
 
     protected function getHeaderActions(): array
     {

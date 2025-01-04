@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
@@ -15,7 +14,9 @@ class UsedcarEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $subject;
+
     public $usedcar;
+
     /**
      * Create a new message instance.
      */
@@ -54,7 +55,7 @@ class UsedcarEmail extends Mailable
     {
         if ($this->usedcar->rc_copy) {
             return [
-                Attachment::fromPath(storage_path('app/public/' . $this->usedcar->rc_copy)),
+                Attachment::fromPath(storage_path('app/public/'.$this->usedcar->rc_copy)),
             ];
         } else {
             return [];

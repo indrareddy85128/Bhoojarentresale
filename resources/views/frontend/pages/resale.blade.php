@@ -57,8 +57,9 @@
                     <div class="card maincard">
                         <h2 id="heading">Looking to Buy or Sell a Flat in MY HOME BHOOJA</h2>
                         <p>Fill all form field to go to next step</p>
-                        <form id="msform" action="{{ route('resale-store') }}" method="POST">
+                        <form id="msform" action="{{ route('lead.store') }}" method="POST">
                             @csrf
+                            <input type="hidden" name="lead_source" value="Resale">
                             <ul id="progressbar">
                                 <li class="active" id="account"><strong>Step-1</strong></li>
                                 <li id="personal"><strong>Step-2</strong></li>
@@ -99,42 +100,42 @@
                                         <div class="col-lg-12 col-md-12 seller-inputs">
                                             <label class="radio-button-container">2595 Sft West Facing (3 BHK)
                                                 <input type="radio" id="role-2" value="2595 Sft West Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 seller-inputs">
                                             <label class="radio-button-container">2680 Sft East Facing (3 BHK)
                                                 <input type="radio" id="role-2" value="2680 Sft East Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 seller-inputs">
                                             <label class="radio-button-container">3430 Sft East Facing (3 BHK)
                                                 <input type="radio" id="role-2" value="3430 Sft East Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 seller-inputs">
                                             <label class="radio-button-container">3430 Sft West Facing (3 BHK)
                                                 <input type="radio" id="role-2" value="3430 Sft West Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 seller-inputs">
                                             <label class="radio-button-container">4070 Sft East Facing (4 BHK)
                                                 <input type="radio" id="role-2" value="4070 Sft East Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 seller-inputs">
                                             <label class="radio-button-container">4070 Sft West Facing (4 BHK)
                                                 <input type="radio" id="role-2" value="4070 Sft West Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
@@ -143,42 +144,42 @@
                                         <div class="col-lg-12 col-md-12 buyer-inputs">
                                             <label class="checkbox-item">2595 Sft West Facing (3 BHK)
                                                 <input type="checkbox" id="role-2" value="2595 Sft West Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 buyer-inputs">
                                             <label class="checkbox-item">2680 Sft East Facing (3 BHK)
                                                 <input type="checkbox" id="role-2" value="2680 Sft East Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 buyer-inputs">
                                             <label class="checkbox-item">3430 Sft East Facing (3 BHK)
                                                 <input type="checkbox" id="role-2" value="3430 Sft East Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 buyer-inputs">
                                             <label class="checkbox-item">3430 Sft West Facing (3 BHK)
                                                 <input type="checkbox" id="role-2" value="3430 Sft West Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 buyer-inputs">
                                             <label class="checkbox-item">4070 Sft East Facing (4 BHK)
                                                 <input type="checkbox" id="role-2" value="4070 Sft East Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 buyer-inputs">
                                             <label class="checkbox-item">4070 Sft West Facing (4 BHK)
                                                 <input type="checkbox" id="role-2" value="4070 Sft West Facing"
-                                                    name="select_flat_size[]">
+                                                    name="flat_details[]">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -197,21 +198,21 @@
                                         <div class="col-lg-12 col-md-12 seller-inputs">
                                             <label class="radio-button-container">Fully Furnished
                                                 <input type="radio" id="role-3" value="Fully Furnished"
-                                                    name="furnished[]">
+                                                    name="furnished_type[]">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 seller-inputs">
                                             <label class="radio-button-container">Semi Furnished
                                                 <input type="radio" id="role-3" value="Semi Furnished"
-                                                    name="furnished[]">
+                                                    name="furnished_type[]">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 seller-inputs">
                                             <label class="radio-button-container">Bare Shell
                                                 <input type="radio" id="role-3" value="Bare Shell"
-                                                    name="furnished[]">
+                                                    name="furnished_type[]">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
@@ -220,14 +221,14 @@
                                         <div class="col-lg-12 col-md-12 buyer-inputs">
                                             <label class="checkbox-item">Fully Furnished
                                                 <input type="checkbox" id="role-3" value="Fully Furnished"
-                                                    name="furnished[]">
+                                                    name="furnished_type[]">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12 col-md-12 buyer-inputs">
                                             <label class="checkbox-item">Semi Furnished
                                                 <input type="checkbox" id="role-3" value="Semi Furnished"
-                                                    name="furnished[]">
+                                                    name="furnished_type[]">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -235,7 +236,7 @@
                                         <div class="col-lg-12 col-md-12 buyer-inputs">
                                             <label class="checkbox-item">Bare Shell
                                                 <input type="checkbox" id="role-3" value="Bare Shell"
-                                                    name="furnished[]">
+                                                    name="furnished_type[]">
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>

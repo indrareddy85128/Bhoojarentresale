@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\GalleryResource\Pages;
-use App\Filament\Resources\GalleryResource\RelationManagers;
 use App\Models\Gallery;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,12 +11,12 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class GalleryResource extends Resource
 {
     protected static ?string $model = Gallery::class;
+
+    protected static ?string $navigationGroup = 'Pages';
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
 

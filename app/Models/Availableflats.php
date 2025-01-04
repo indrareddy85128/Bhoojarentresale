@@ -13,6 +13,6 @@ class Availableflats extends Model
         'bedroom',
         'bathroom',
         'sft',
-        'content'
+        'content',
     ];
 }

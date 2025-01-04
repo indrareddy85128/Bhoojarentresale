@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
@@ -15,6 +14,7 @@ class InsuranceEmail extends Mailable
     use Queueable, SerializesModels;
 
     public $subject;
+
     public $insurance;
 
     /**
@@ -55,7 +55,7 @@ class InsuranceEmail extends Mailable
     {
         if ($this->insurance->previous_policy) {
             return [
-                Attachment::fromPath(storage_path('app/public/' . $this->insurance->previous_policy)),
+                Attachment::fromPath(storage_path('app/public/'.$this->insurance->previous_policy)),
             ];
         } else {
             return [];

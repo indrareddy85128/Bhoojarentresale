@@ -34,8 +34,9 @@ class LeadResource extends Resource implements HasShieldPermissions
 
     public static function canCreate(): bool
     {
-        return false;
+        return Auth::user()->hasRole('admin');
     }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -51,6 +52,12 @@ class LeadResource extends Resource implements HasShieldPermissions
                     ])
                     ->default('Open')
                     ->required(),
+
+                Select::make('user_id')
+                    ->label('Telecaller')
+                    ->options(User::role('telecaller')->pluck('name', 'id'))
+                    ->required()
+                    ->visible(fn() => Auth::user()->hasRole('super_admin')),
             ]);
     }
 
@@ -58,12 +65,19 @@ class LeadResource extends Resource implements HasShieldPermissions
     {
         return $infolist
             ->schema([
+
                 TextEntry::make('name'),
                 TextEntry::make('email'),
                 TextEntry::make('phone'),
                 TextEntry::make('lead_source'),
                 TextEntry::make('lead_status')->label('Status'),
                 TextEntry::make('message'),
+                Section::make('Telecaller Information')
+                    ->schema([
+                        TextEntry::make('Telecaller')
+                            ->label('Assigned Telecaller')
+                            ->state(fn($record) => $record->user ? $record->user->name : 'No Telecaller Assigned'),
+                    ]),
                 Section::make('Form Details')
                     ->schema(function (Lead $record) {
                         if (empty($record->form_data)) {
@@ -294,7 +308,15 @@ class LeadResource extends Resource implements HasShieldPermissions
 
     public static function table(Table $table): Table
     {
+        $query = Lead::query();
+
+        // Check if the user is a telecaller
+        if (Auth::user()->hasRole('telecaller')) {
+            $query->where('user_id', Auth::id());
+        }
+
         return $table
+            ->query($query)
             ->columns([
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('email')->searchable(),
@@ -349,7 +371,7 @@ class LeadResource extends Resource implements HasShieldPermissions
             'update',
             'delete',
             'delete_any',
-            'assign'
+
         ];
     }
 }

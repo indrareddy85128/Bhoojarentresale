@@ -15,6 +15,7 @@ class Lead extends Model
         'lead_status',
         'form_data',
         'message',
+        'document'
     ];
 
     protected $casts = [

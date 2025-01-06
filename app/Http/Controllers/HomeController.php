@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\LeadEmail;
 use App\Models\About;
 use App\Models\Availableflats;
 use App\Models\Faq;
@@ -11,6 +12,7 @@ use App\Models\Review;
 use App\Models\Slider;
 use App\Models\Wish;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -81,23 +83,43 @@ class HomeController extends Controller
 
     public function leadStore(Request $request)
     {
-        $data = $request->all();
-        $formData = [];
-        foreach ($data as $key => $value) {
-            if ($key !== '_token' && $key !== 'name' && $key !== 'email' && $key !== 'phone' && $key !== 'message' && $key !== 'lead_source' && $key !== 'lead_status' && $key !== 'authorise' && $key !== 'submit') {
-                $formData[$key] = $value;
-            }
-        }
-        $data['form_data'] = json_encode($formData);
-        $lead = new Lead;
-        $lead->name = $data['name'];
-        $lead->email = $data['email'];
-        $lead->phone = $data['phone'];
-        $lead->message = $data['message'];
-        $lead->lead_source = $data['lead_source'];
-        $lead->form_data = $data['form_data'];
-        $lead->save();
+        $to = 'indrareddy85128@gmail.com';
+        $subject = 'Lead Form - Bhoojarentresale.com';
 
-        return redirect()->back()->with('success', 'Email sent successfully!');
+        try {
+            $data = $request->all();
+            $formData = [];
+            foreach ($data as $key => $value) {
+                if ($key !== '_token' && $key !== 'name' && $key !== 'email' && $key !== 'phone' && $key !== 'message' && $key !== 'lead_source' && $key !== 'lead_status' && $key !== 'authorise' && $key !== 'submit' && $key !== 'document') {
+                    $formData[$key] = $value;
+                }
+            }
+            $data['form_data'] = json_encode($formData);
+            if ($request->hasFile('document')) {
+                // Get the file
+                $file = $request->file('document');
+
+                // Store the file in 'documents' folder within the public disk
+                $documentPath = $file->store('documents', 'public');
+
+                // Save the file path in the database (instead of the raw file)
+                $data['document'] = $documentPath;
+            }
+            $lead = new Lead;
+            $lead->name = $data['name'];
+            $lead->email = $data['email'];
+            $lead->phone = $data['phone'];
+            $lead->message = $data['message'];
+            $lead->lead_source = $data['lead_source'];
+            $lead->document = $data['document'] ?? null;
+            $lead->form_data = $data['form_data'];
+
+            $lead->save();
+            Mail::to($to)->send(new LeadEmail($subject, $lead));
+
+            return redirect()->back()->with('success', 'Email sent successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('failed', 'Failed to send email: ' . $e->getMessage());
+        }
     }
 }

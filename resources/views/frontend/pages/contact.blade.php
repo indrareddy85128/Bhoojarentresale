@@ -95,8 +95,9 @@
                 <div class="col-lg-12">
                     <div class="ltn__form-box contact-form-box box-shadow white-bg">
                         <h4 class="title-2">Get A Quote</h4>
-                        <form id="contact-form" action="{{ route('contact-store') }}" method="post">
+                        <form id="contact-form" action="{{ route('lead.store') }}" method="post">
                             @csrf
+                            <input type="hidden" name="lead_source" value="Contact Us">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="input-item input-item-name ltn__custom-icon">
@@ -108,17 +109,11 @@
                                         <input type="text" name="phone" placeholder="Enter phone number" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="input-item input-item-email ltn__custom-icon">
                                         <input type="email" name="email" placeholder="Enter email address" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="input-item input-item-textarea ltn__custom-icon">
-                                        <input type="text" name="subject" placeholder="Enter Subject">
-                                    </div>
-                                </div>
-
                             </div>
                             <div class="input-item input-item-textarea ltn__custom-icon">
                                 <textarea name="message" placeholder="Enter message (optional)"></textarea>

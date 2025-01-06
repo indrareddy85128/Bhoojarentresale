@@ -55,7 +55,7 @@ class RentEmail extends Mailable
     {
         if ($this->rent->resume) {
             return [
-                Attachment::fromPath(storage_path('app/public/'.$this->rent->resume)),
+                Attachment::fromPath(storage_path('app/public/' . $this->rent->resume)),
             ];
         } else {
             return [];

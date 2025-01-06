@@ -56,9 +56,10 @@
                 <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 text-center ">
                     <div class="card maincard" x-data="{ carInsurance: true }">
                         <h2 id="heading" class="pb-2">Looking to Buy or Sell a Flat in MY HOME BHOOJA</h2>
-                        <form id="msform" action="{{ route('used-cars-store') }}" method="POST"
+                        <form id="msform" action="{{ route('lead.store') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="lead_source" value="Used Cars">
                             <fieldset>
                                 <div class="form-card">
                                     <div class="row">
@@ -110,7 +111,7 @@
                                     </div>
                                     <div x-show="carInsurance">
                                         <h6>Upload Your RC Copy (Optional)</h6>
-                                        <input type="file" id="myFile" name="rc_copy"><br>
+                                        <input type="file" id="myFile" name="document"><br>
                                         <p>
                                             <small>* PDF files upload supported as well.</small>
                                         </p>

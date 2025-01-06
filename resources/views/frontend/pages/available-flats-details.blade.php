@@ -10,7 +10,8 @@
                         <h1 class="page-title">{{ $available_flat->name }}</h1>
                         <div class="ltn__breadcrumb-list">
                             <ul>
-                                <li><a href="{{ route('home') }}"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span>
+                                <li><a href="{{ route('home') }}"><span class="ltn__secondary-color"><i
+                                                class="fas fa-home"></i></span>
                                         Home</a></li>
                                 <li>Available Flats</li>
                                 <li>{{ $available_flat->name }}</li>
@@ -75,8 +76,9 @@
                         </div>
                         <div class="widget ltn__form-widget">
                             <h4 class="ltn__widget-title ltn__widget-title-border-2">Enquiry Now</h4>
-                            <form action="{{ route('available-flats-store') }}" method="post">
+                            <form action="{{ route('lead.store') }}" method="post">
                                 @csrf
+                                <input type="hidden" name="lead_source" value="Available Flats">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="input-item input-item-name ltn__custom-icon">
@@ -95,7 +97,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="input-item input-item-textarea">
-                                            <input class="px-1" type="text" name="subject"
+                                            <input class="px-1" type="text" name="message"
                                                 value="{{ $available_flat->name }} ({{ $available_flat->type }})"
                                                 placeholder="{{ $available_flat->name }}({{ $available_flat->type }})"
                                                 readonly>

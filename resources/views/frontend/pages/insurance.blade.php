@@ -54,9 +54,10 @@
                     <div class="card maincard" x-data="{ carInsurance: true }">
                         <h2 id="heading">Looking to Buy or Sell a Flat in MY HOME BHOOJA</h2>
                         <p>Fill all form field to go to next step</p>
-                        <form id="msform" action="{{ route('insurance-store') }}" method="POST"
+                        <form id="msform" action="{{ route('lead.store') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="lead_source" value="Insurance">
                             <ul id="progressbar">
                                 <li style="width: 50%" class="active" id="account"><strong>Step-1</strong></li>
                                 <li style="width: 50%" id="personal"><strong>Step-2</strong></li>
@@ -69,7 +70,8 @@
                                         <div class="col-lg-12 col-md-12">
                                             <label class="radio-button-container" x-on:click="carInsurance=true">Car
                                                 Insurance
-                                                <input type="radio" id="role-1" value="Car Insurance" name="insurance">
+                                                <input type="radio" id="role-1" value="Car Insurance"
+                                                    name="insurance_options">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
@@ -77,7 +79,7 @@
                                             <label class="radio-button-container" x-on:click="carInsurance=false">Other
                                                 Insurance
                                                 <input type="radio" id="role-1" value="Other Insurance"
-                                                    name="insurance">
+                                                    name="insurance_options">
                                                 <span class="checkradio"></span>
                                             </label>
                                         </div>
@@ -118,7 +120,7 @@
                                     </div>
                                     <div x-show="carInsurance">
                                         <h6>Upload Your previous policy (Optional)</h6>
-                                        <input type="file" id="myFile" name="previous_policy"><br>
+                                        <input type="file" id="myFile" name="document"><br>
                                         <p>
                                             <small>* PDF files upload supported as well.</small>
                                         </p>

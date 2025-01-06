@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('lead_status')->default('Open');
             $table->json('form_data')->nullable();
             $table->text('message')->nullable();
+            $table->text('document')->nullable();
             $table->timestamps();
         });
     }

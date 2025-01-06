@@ -57,9 +57,10 @@
                     <div class="card maincard" x-data="{ carNumber: false, rcUpload: false, mortgageLoan: false, Personal: false }">
                         <h2 id="heading">Looking to Buy or Sell a Flat in MY HOME BHOOJA</h2>
                         <p>Fill all form field to go to next step</p>
-                        <form id="msform" action="{{ route('loans-store') }}" method="POST"
+                        <form id="msform" action="{{ route('lead.store') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="lead_source" value="Loan">
                             <ul id="progressbar">
                                 <li style="width: 50%" class="active" id="account"><strong>Step-1</strong></li>
                                 <li style="width: 50%" id="personal"><strong>Step-2</strong></li>
@@ -74,7 +75,7 @@
                                                     Car
                                                     Loan
                                                     <input type="radio" id="role-1" value="New Car Loan"
-                                                        name="loan">
+                                                        name="loan_options">
                                                     <span class="checkradio"></span>
                                                 </label>
                                             </div>
@@ -84,7 +85,7 @@
                                                     Car
                                                     Loan
                                                     <input type="radio" id="role-1" value="Used Car Loan"
-                                                        name="loan">
+                                                        name="loan_options">
                                                     <span class="checkradio"></span>
                                                 </label>
                                             </div>
@@ -92,7 +93,8 @@
                                                 <label class="radio-button-container"
                                                     x-on:click="carNumber=false;rcUpload=false;mortgageLoan=false;Personal=false">Home
                                                     Laon
-                                                    <input type="radio" id="role-1" value="Home Laon" name="loan">
+                                                    <input type="radio" id="role-1" value="Home Laon"
+                                                        name="loan_options">
                                                     <span class="checkradio"></span>
                                                 </label>
                                             </div>
@@ -101,7 +103,7 @@
                                                     x-on:click="carNumber=false;rcUpload=false;mortgageLoan=true;Personal=false">Mortgage
                                                     Loan
                                                     <input type="radio" id="role-1" value="Mortgage Loan"
-                                                        name="loan">
+                                                        name="loan_options">
                                                     <span class="checkradio"></span>
                                                 </label>
                                             </div>
@@ -110,7 +112,7 @@
                                                     x-on:click="carNumber=false;rcUpload=false;mortgageLoan=false;Personal=true">Personal
                                                     Loan
                                                     <input type="radio" id="role-1" value="Personal Loan"
-                                                        name="loan">
+                                                        name="loan_options">
                                                     <span class="checkradio"></span>
                                                 </label>
                                             </div>
@@ -118,7 +120,8 @@
                                                 <label class="radio-button-container"
                                                     x-on:click="carNumber=false;rcUpload=false;mortgageLoan=false;Personal=false">Other
                                                     Loan
-                                                    <input type="radio" id="role-1" value="Other Loan" name="loan">
+                                                    <input type="radio" id="role-1" value="Other Loan"
+                                                        name="loan_options">
                                                     <span class="checkradio"></span>
                                                 </label>
                                             </div>
@@ -133,20 +136,21 @@
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 pt-2" x-show="rcUpload">
                                                 <label class="checkbox-item">Used Car Purchase
-                                                    <input type="checkbox" value="Used Car Purchase" name="loan_options[]">
+                                                    <input type="checkbox" value="Used Car Purchase"
+                                                        name="sub_loan_options[]">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
                                             <div class="col-lg-12 col-md-12" x-show="rcUpload">
                                                 <label class="checkbox-item">Refinance
-                                                    <input type="checkbox" value="Refinance" name="loan_options[]">
+                                                    <input type="checkbox" value="Refinance" name="sub_loan_options[]">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
                                             <div class="col-lg-12 col-md-12 pb-2" x-show="rcUpload">
                                                 <label class="checkbox-item">Balance Transfer & Topup
                                                     <input type="checkbox" value="Balance Transfer & Topup"
-                                                        name="loan_options[]">
+                                                        name="sub_loan_options[]">
                                                     <span class="checkmark"></span>
                                                 </label>
                                             </div>
@@ -154,34 +158,38 @@
                                                 <div class="col-lg-12 col-md-12">
                                                     <label class="radio-button-container"
                                                         x-on:click="subCheckbox=true; residential=false">Residential
-                                                        <input type="radio" value="Residential" name="loan_options[]">
+                                                        <input type="radio" value="Residential"
+                                                            name="mortgage_loan_options">
                                                         <span class="checkradio"></span>
                                                     </label>
                                                 </div>
                                                 <div class="col-lg-12 col-md-12">
                                                     <label class="radio-button-container"
                                                         x-on:click="subCheckbox=true; residential=true">Commercial
-                                                        <input type="radio" value="Commercial" name="loan_options[]">
+                                                        <input type="radio" value="Commercial"
+                                                            name="mortgage_loan_options">
                                                         <span class="checkradio"></span>
                                                     </label>
                                                 </div>
                                                 <div x-show="subCheckbox" x-transition>
                                                     <div class="col-lg-12 col-md-12">
                                                         <label class="checkbox-item">Refinace
-                                                            <input type="checkbox" value="Refinace" name="options[]">
+                                                            <input type="checkbox" value="Refinace"
+                                                                name="sub_mortgage_loan_options[]">
                                                             <span class="checkmark"></span>
                                                         </label>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12">
                                                         <label class="checkbox-item">Balance Transfer $Topup
                                                             <input type="checkbox" value="Balance Transfer $Topup"
-                                                                name="options[]">
+                                                                name="sub_mortgage_loan_options[]">
                                                             <span class="checkmark"></span>
                                                         </label>
                                                     </div>
                                                     <div class="col-lg-12 col-md-12" x-show="residential" x-transition>
                                                         <label class="checkbox-item">Purchase
-                                                            <input type="checkbox" value="Purchase" name="options[]">
+                                                            <input type="checkbox" value="Purchase"
+                                                                name="sub_mortgage_loan_options[]">
                                                             <span class="checkmark"></span>
                                                         </label>
                                                     </div>
@@ -229,7 +237,7 @@
                                         </div>
                                         <div x-show="rcUpload">
                                             <h6>Upload Your RC Copy (Optional)</h6>
-                                            <input type="file" id="myFile" name="rc_copy"><br>
+                                            <input type="file" id="myFile" name="document"><br>
                                             <p>
                                                 <small>* PDF files upload supported as well.</small>
                                             </p>

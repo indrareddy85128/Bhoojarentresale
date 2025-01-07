@@ -276,17 +276,11 @@
                                                     <li><label>Fourth Bedroom</label> <span>South East </span>
                                                     </li>
                                                     <li><label>Puja Room</label> <span>Northeast </span></li>
-                                                    <li><label>Open Living & Dining Area</label> <span>Spacious and
-                                                            Bright</span></li>
-                                                    <li><label>Balconies</label> <span>2 with Garden View</span>
+                                                    <li><label>Balconies</label> <span>2 wide Balconies Available</span>
                                                     </li>
-                                                    <li><label>Fully Furnished</label> <span>Elegant, Modern
-                                                            Furniture</span></li>
-                                                    <li><label>Parking</label> <span>3 Car Spaces Available</span>
+                                                    <li><label>Parking</label> <span>4 Car Spaces Available</span>
                                                     </li>
                                                     <li><label>Servant Quarters</label> <span>Included</span></li>
-                                                    <li><label>Garden View</label> <span>Tranquil and
-                                                            Peaceful</span></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -320,20 +314,12 @@
                                                     </li>
                                                     <li><label>Fourth Bedroom</label> <span>South East </span>
                                                     </li>
-                                                    <li><label>Puja Room</label> <span>Dedicated Space with
-                                                            Traditional Design</span></li>
-                                                    <li><label>Living & Dining Areas</label> <span>Expansive,
-                                                            Open-Plan Layout</span></li>
-                                                    <li><label>Balconies</label> <span>2 with Garden View</span>
+                                                    <li><label>Puja Room</label> <span>Northeast</span></li>
+                                                    <li><label>Balconies</label> <span>2 wide Balconies Available</span>
                                                     </li>
-                                                    <li><label>Fully Furnished</label> <span>Stylish & Comfortable
-                                                            Furniture</span></li>
-                                                    <li><label>Parking</label> <span>3 Car Spaces Available</span>
+                                                    <li><label>Parking</label> <span>4 Car Spaces Available</span>
                                                     </li>
-                                                    <li><label>Servant Quarters</label> <span>Separate Space for
-                                                            Domestic Help</span></li>
-                                                    <li><label>Garden View</label> <span>Tranquil and
-                                                            Peaceful</span></li>
+                                                    <li><label>Servant Quarters</label> <span>Included</span></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -349,6 +335,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

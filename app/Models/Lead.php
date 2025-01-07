@@ -26,4 +26,9 @@ class Lead extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function dailyUpdates()
+    {
+        return $this->hasMany(DailyUpdate::class)->latest();
+    }
 }

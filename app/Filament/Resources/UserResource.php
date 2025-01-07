@@ -46,10 +46,9 @@ class UserResource extends Resource
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('email')->searchable(),
                 TextColumn::make('phone'),
+                TextColumn::make('Roles.name'),
             ])
-            ->filters([
-                //
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

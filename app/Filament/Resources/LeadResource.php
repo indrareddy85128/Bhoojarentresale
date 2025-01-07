@@ -3,11 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\LeadResource\Pages;
+use App\Filament\Resources\LeadResource\RelationManagers\DailyUpdatesRelationManager;
 use App\Models\Lead;
 use App\Models\User;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
@@ -21,7 +25,10 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -58,6 +65,8 @@ class LeadResource extends Resource implements HasShieldPermissions
                     ->options(User::role('telecaller')->pluck('name', 'id'))
                     ->required()
                     ->visible(fn() => Auth::user()->hasRole('super_admin')),
+
+
             ]);
     }
 
@@ -78,6 +87,7 @@ class LeadResource extends Resource implements HasShieldPermissions
                             ->label('Assigned Telecaller')
                             ->state(fn($record) => $record->user ? $record->user->name : 'No Telecaller Assigned'),
                     ]),
+
                 Section::make('Form Details')
                     ->schema(function (Lead $record) {
                         if (empty($record->form_data)) {
@@ -326,7 +336,25 @@ class LeadResource extends Resource implements HasShieldPermissions
 
             ])
             ->filters([
-                //
+                SelectFilter::make('lead_source')
+                    ->options(Lead::pluck('lead_source', 'lead_source')->toArray()),
+                Filter::make('created_at')
+                    ->form([
+                        DatePicker::make('created_from'),
+                        DatePicker::make('created_until'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['created_from'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
+                            )
+                            ->when(
+                                $data['created_until'],
+                                fn(Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
+                            );
+                    })
+
             ])
             ->actions([
                 Action::make('Document')
@@ -349,7 +377,7 @@ class LeadResource extends Resource implements HasShieldPermissions
     public static function getRelations(): array
     {
         return [
-            //
+            DailyUpdatesRelationManager::class,
         ];
     }
 

@@ -58,11 +58,6 @@ class LeadPolicy
         return $user->can('delete_any_lead');
     }
 
-    public function assign(User $user): bool
-    {
-        return $user->can('assign_lead');
-    }
-
     /**
      * Determine whether the user can permanently delete.
      */

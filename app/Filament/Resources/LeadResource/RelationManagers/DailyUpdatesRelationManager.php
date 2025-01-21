@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\LeadResource\RelationManagers;
 
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -29,17 +31,18 @@ class DailyUpdatesRelationManager extends RelationManager
                         'call' => 'Call',
                         'email' => 'Email',
                         'meeting' => 'Meeting',
-                        // Add more options as needed
+
                     ]),
 
                 Textarea::make('comment')
                     ->nullable()
-                    ->maxLength(500), // Adjust max length as needed
+                    ->maxLength(500),
 
                 DatePicker::make('next_call_date')
                     ->nullable()
-                    ->native(false)
                     ->label('Next Call Date'),
+                TimePicker::make('next_call_time')->nullable()->seconds(false),
+
             ]);
     }
 
@@ -55,6 +58,9 @@ class DailyUpdatesRelationManager extends RelationManager
                 TextColumn::make('next_call_date')
                     ->label('Next Call Date')
                     ->formatStateUsing(fn($state) => \Carbon\Carbon::parse($state)->format('Y-m-d')),
+                TextColumn::make('next_call_time')
+                    ->label('Next Call Time')
+                    ->formatStateUsing(fn($state) => \Carbon\Carbon::parse($state)->format('H:i')),
             ])
             ->filters([
                 //

@@ -60,13 +60,15 @@
                         {!! $available_flat->content !!}
                     </div>
                 </div>
+
                 <div class="col-lg-4">
                     <aside class="sidebar-area ltn__right-sidebar">
                         <div class="widget-2 ltn__menu-widget ltn__menu-widget-2 text-uppercase">
                             <ul>
                                 @foreach ($available_flats as $available_flat1)
                                     <li>
-                                        <a href="{{ route('available-flats-details', $available_flat1->id) }}">
+                                        <a class="active"
+                                            href="{{ route('available-flats-details', $available_flat1->id) }}">
                                             {{ $available_flat1->name }}
                                             <span><i class="fas fa-arrow-right"></i></span>
                                         </a>
@@ -105,9 +107,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
-                                        <label class="checkbox-item">I authorise Bhooja Available Flats team to
-                                            call/sms/email me about its Available Flats and have accepted the term and
-                                            conditions
+                                        <label class="checkbox-item">I authorise BhoojaRentResale team to call/sms/email me and have accepted the terms and conditions
                                             <input type="checkbox" name="authorise" value="Yes" required>
                                             <span class="checkmark"></span>
                                         </label>

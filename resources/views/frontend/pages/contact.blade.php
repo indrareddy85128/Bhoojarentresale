@@ -94,7 +94,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ltn__form-box contact-form-box box-shadow white-bg">
-                        <h4 class="title-2">Get A Quote</h4>
+                        <h4 class="title-2">Write Your Enquiry</h4>
                         <form id="contact-form" action="{{ route('lead.store') }}" method="post">
                             @csrf
                             <input type="hidden" name="lead_source" value="Contact Us">
@@ -119,9 +119,8 @@
                                 <textarea name="message" placeholder="Enter message (optional)"></textarea>
                             </div>
                             <div class="col-lg-12 col-md-12 mb-3">
-                                <label class="checkbox-item">I authorise Bhooja Enquiry team to
-                                    call/sms/email me about its Enquiry and have accepted the term and
-                                    conditions
+                                <label class="checkbox-item">I authorise BhoojaRentResale team to call/sms/email me and have
+                                    accepted the terms and conditions
                                     <input type="checkbox" name="authorise" value="Yes" required>
                                     <span class="checkmark"></span>
                                 </label>

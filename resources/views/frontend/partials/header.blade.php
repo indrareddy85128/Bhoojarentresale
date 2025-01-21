@@ -130,7 +130,7 @@
                 </li>
                 <li><a href="#">Other Services</a>
                 </li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
         </div>
         <div class="ltn__social-media-2">

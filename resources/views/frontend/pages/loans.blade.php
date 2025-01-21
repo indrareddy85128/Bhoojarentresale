@@ -55,7 +55,7 @@
             <div class="row justify-content-center">
                 <div class="col-sm-12 col-md-7 col-lg-7 col-xl-7 text-center ">
                     <div class="card maincard" x-data="{ carNumber: false, rcUpload: false, mortgageLoan: false, Personal: false }">
-                        <h2 id="heading">Looking to Buy or Sell a Flat in MY HOME BHOOJA</h2>
+                        <h2 id="heading">Looking For a Loan (DSA For Leading Banks & NBFCs)</h2>
                         <p>Fill all form field to go to next step</p>
                         <form id="msform" action="{{ route('lead.store') }}" method="POST"
                             enctype="multipart/form-data">
@@ -92,8 +92,8 @@
                                             <div class="col-lg-12 col-md-12">
                                                 <label class="radio-button-container"
                                                     x-on:click="carNumber=false;rcUpload=false;mortgageLoan=false;Personal=false">Home
-                                                    Laon
-                                                    <input type="radio" id="role-1" value="Home Laon"
+                                                    Loan
+                                                    <input type="radio" id="role-1" value="Home Loan"
                                                         name="loan_options">
                                                     <span class="checkradio"></span>
                                                 </label>
@@ -244,9 +244,7 @@
                                         </div>
 
                                         <div class="col-lg-12 col-md-12">
-                                            <label class="checkbox-item">I authorise Bhooja resale team to
-                                                call/sms/email me about its resale and have accepted the term and
-                                                conditions
+                                            <label class="checkbox-item">I authorise BhoojaRentResale team to call/sms/email me and have accepted the terms and conditions
                                                 <input type="checkbox" name="authorise" value="Yes" required>
                                                 <span class="checkmark"></span>
                                             </label>

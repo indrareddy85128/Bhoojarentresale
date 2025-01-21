@@ -11,7 +11,8 @@
                             available flats</h1>
                         <div class="ltn__breadcrumb-list">
                             <ul>
-                                <li><a href="{{ route('home') }}"><span class="ltn__secondary-color"><i class="fas fa-home"></i></span>
+                                <li><a href="{{ route('home') }}"><span class="ltn__secondary-color"><i
+                                                class="fas fa-home"></i></span>
                                         Home</a></li>
                                 <li>
                                     available flats</li>
@@ -31,8 +32,9 @@
                     <div class="col-xl-4 col-sm-12">
                         <div class="ltn__product-item ltn__product-item-5 text-center---">
                             <div class="product-img">
-                                <a href="{{ route('available-flats-details', $available_flat->id) }}"><img
-                                        src="{{ asset(Storage::url($available_flat->image)) }}" alt="#"></a>
+                                <a href="{{ route('available-flats-details', $available_flat->id) }}">
+                                    <img src="{{ asset(Storage::url($available_flat->image)) }}" alt="#">
+                                </a>
                                 <div class="real-estate-agent">
                                 </div>
                             </div>

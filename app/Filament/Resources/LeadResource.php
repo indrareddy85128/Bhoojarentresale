@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\LeadExporter;
 use App\Filament\Resources\LeadResource\Pages;
 use App\Filament\Resources\LeadResource\RelationManagers\DailyUpdatesRelationManager;
 use App\Models\Lead;
 use App\Models\User;
 use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
+use Faker\Provider\ar_EG\Text;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
@@ -32,6 +34,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Filament\Tables\Actions\ExportAction;
 
 class LeadResource extends Resource implements HasShieldPermissions
 {
@@ -41,21 +44,43 @@ class LeadResource extends Resource implements HasShieldPermissions
 
     public static function canCreate(): bool
     {
-        return Auth::user()->hasRole('admin');
+        return Auth::user()->hasRole('super_admin');
     }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                TextInput::make('name')
+                    ->label('Name')
+                    ->required()->visible(fn() => Auth::user()->hasRole('super_admin')),
+                TextInput::make('phone')->label('phone')
+                    ->required()->visible(fn() => Auth::user()->hasRole('super_admin')),
+                TextInput::make('email')
+                    ->label('Email')
+                    ->required()->visible(fn() => Auth::user()->hasRole('super_admin')),
+                Select::make('lead_source')
+                    ->label('Lead Source')
+                    ->options([
+                        'Available Flats' => 'Available Flats',
+                        'Resale' => 'Resale',
+                        'Rent' => 'Rent',
+                        'Loans' => 'Loans',
+                        'Insurance' => 'Insurance',
+                        'Used Cars' => 'Used Cars',
+                        'Contact Us' => 'Contact Us',
+                    ])
+                    ->default('Website')
+                    ->required()->visible(fn() => Auth::user()->hasRole('super_admin')),
+                Textarea::make('message')->columnSpan('full')->visible(fn() => Auth::user()->hasRole('super_admin')),
                 Select::make('lead_status')
                     ->label('Status')
                     ->options([
                         'Open' => 'Open',
-                        'Contacted' => 'Contacted',
-                        'Qualified' => 'Qualified',
+                        'Pending' => 'Pending',
+                        'Completed' => 'Completed',
                         'Lost' => 'Lost',
-                        'Unqualified' => 'Unqualified',
+                        'Rejected' => 'Rejected',
                     ])
                     ->default('Open')
                     ->required(),
@@ -63,9 +88,16 @@ class LeadResource extends Resource implements HasShieldPermissions
                 Select::make('user_id')
                     ->label('Telecaller')
                     ->options(User::role('telecaller')->pluck('name', 'id'))
-                    ->required()
-                    ->visible(fn() => Auth::user()->hasRole('super_admin')),
+                    // ->required()
+                    ->visible(fn() => Auth::user()->hasRole('super_admin'))
+                    ->afterStateUpdated(function ($get) {
+                        $recipient = User::find($get('user_id'));
 
+                        Notification::make()
+                            ->title('New Lead Assigned')
+                            ->body('You have a new lead assigned by admin.')
+                            ->sendToDatabase($recipient);
+                    }),
 
             ]);
     }
@@ -326,8 +358,12 @@ class LeadResource extends Resource implements HasShieldPermissions
         }
 
         return $table
-            ->query($query)
+
+            ->query($query->orderBy('id', 'desc'))
             ->columns([
+                TextColumn::make('index')
+                    ->label('Sl.no')
+                    ->rowIndex(),
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('email')->searchable(),
                 TextColumn::make('phone')->searchable(),
@@ -371,7 +407,11 @@ class LeadResource extends Resource implements HasShieldPermissions
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(LeadExporter::class)
+            ]);;
     }
 
     public static function getRelations(): array

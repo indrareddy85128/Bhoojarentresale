@@ -11,6 +11,7 @@ class DailyUpdate extends Model
         'update_type',
         'comment',
         'next_call_date',
+        'next_call_time'
     ];
 
     public function lead()

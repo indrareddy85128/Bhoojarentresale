@@ -245,7 +245,7 @@
                                             Option</p>
                                     </div>
                                 </div>
-                                <input type="button" name="next" class="next action-button" value="next" />
+                                <input type="button" name="next" class="next action-button" value="Next" />
                                 <input type="button" name="previous" class="previous action-button-previous"
                                     value="Previous" />
                             </fieldset>
@@ -282,9 +282,8 @@
                                         </p>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
-                                        <label class="checkbox-item">I authorise Bhooja rent team to
-                                            call/sms/email me about its rent and have accepted the term and
-                                            conditions
+                                        <label class="checkbox-item">I authorise BhoojaRentResale team to call/sms/email me
+                                            and have accepted the terms and conditions
                                             <input type="checkbox" name="authorise" value="Yes" required>
                                             <span class="checkmark"></span>
                                         </label>

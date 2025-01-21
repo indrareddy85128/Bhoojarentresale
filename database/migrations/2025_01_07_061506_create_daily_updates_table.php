@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('update_type');
             $table->string('comment');
             $table->date('next_call_date')->nullable();
+            $table->time('next_call_time')->nullable();
             $table->timestamps();
         });
     }
